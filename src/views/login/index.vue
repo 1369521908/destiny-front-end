@@ -108,15 +108,17 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
+          console.log('校验参数结果:' + valid)
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
-          }).catch(() => {
+          }).catch((e) => {
+            console.log(e)
             this.loading = false
           })
         } else {
-          console.log('error submit!!')
+          console.log('提交参数校验不通过!!!')
           return false
         }
       })

@@ -7,7 +7,8 @@
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <!--<img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">-->
+          <img :src="avatarC" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
@@ -16,9 +17,9 @@
               Home
             </el-dropdown-item>
           </router-link>
-          <a target="_blank" href="https://github.com/PanJiaChen/vue-admin-template/">
+          <!--<a target="_blank" href="https://github.com/PanJiaChen/vue-admin-template/">
             <el-dropdown-item>Github</el-dropdown-item>
-          </a>
+          </a>-->
           <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
             <el-dropdown-item>Docs</el-dropdown-item>
           </a>
@@ -41,6 +42,11 @@ export default {
     Breadcrumb,
     Hamburger
   },
+  data() {
+    return {
+      avatarC: 'http://pic.nipic.com/2008-02-23/2008223104324852_2.jpg'
+    }
+  },
   computed: {
     ...mapGetters([
       'sidebar',
@@ -49,7 +55,8 @@ export default {
   },
   methods: {
     toggleSideBar() {
-      this.$store.dispatch('app/toggleSideBar')
+      const promise = this.$store.dispatch('app/toggleSideBar')
+      console.log(promise)
     },
     async logout() {
       await this.$store.dispatch('user/logout')
