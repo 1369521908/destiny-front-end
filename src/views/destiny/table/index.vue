@@ -5,26 +5,29 @@
 </template>
 
 <script>
+import { getList } from '@/api/destiny'
+
 export default {
   data() {
     return {
-      loading: false
+      loading: false,
+      list: null
     }
   },
   mounted() {
     this.loading = false
   },
   methods: {
-    handleClick(done) {
+    handleClick() {
       this.loading = true
-
-      this.$confirm('确认关闭？')
-        .then(_ => {
-          this.loading = false
-          done()
-        })
-        .catch(e => {
-        })
+      getList().then(response => {
+        this.list = response.data.items
+        console.log(response)
+        this.loading = false
+      }).catch(e => {
+        console.log(e)
+        this.loading = false
+      })
     }
   }
 }

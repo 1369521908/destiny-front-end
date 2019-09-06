@@ -44,7 +44,8 @@ export default {
   },
   data() {
     return {
-      avatarC: 'http://pic.nipic.com/2008-02-23/2008223104324852_2.jpg'
+      // avatarC: 'http://pic.nipic.com/2008-02-23/2008223104324852_2.jpg'
+      avatarC: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567788797100&di=32613c9e0b9897d317077afdd4a24260&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20161109%2F38f1d7e030ba46e9b5a2ad13d5f81e71_th.gif'
     }
   },
   computed: {

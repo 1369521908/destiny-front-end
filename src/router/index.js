@@ -218,20 +218,21 @@ export const destinyRoutes = [
   {
     path: '/destiny',
     name: 'Destiny',
+    redirect: '/destiny/table',
     component: Layout,
     meta: { title: 'Destiny', icon: 'eye-open' },
     children: [
       {
-        path: '/destiny/dialog',
+        path: 'dialog',
         name: 'Dialog',
         component: () => import('@/views/destiny/dialog/index'),
         meta: { title: 'Dialog', icon: 'eye-open' }
       },
       {
-        path: '/destiny/table',
-        name: 'Table',
+        path: 'demo',
+        name: 'Demo',
         component: () => import('@/views/destiny/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        meta: { title: 'Demo', icon: 'table' }
       }
     ]
   },

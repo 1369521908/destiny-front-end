@@ -108,13 +108,13 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          console.log('校验参数结果:' + valid)
+          console.log('校验参数结果:' + this.loginForm.username)
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
           }).catch((e) => {
-            console.log(e)
+            console.log('登录参数出现异常' + e)
             this.loading = false
           })
         } else {

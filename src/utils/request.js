@@ -21,11 +21,12 @@ service.interceptors.request.use(
       // please modify it according to the actual situation
       config.headers['X-Token'] = getToken()
     }
+    console.log('构造请求配置')
     return config
   },
   error => {
     // do something with request error
-    console.log(error) // for debug
+    console.log('请求封装类出错' + error) // for debug
     return Promise.reject(error)
   }
 )
