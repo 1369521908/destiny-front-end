@@ -12,6 +12,8 @@ import App from './App'
 import store from './store'
 import router from './router'
 
+import moment from 'moment'
+
 import '@/icons' // icon
 import '@/permission' // permission control
 
@@ -30,6 +32,9 @@ if (process.env.NODE_ENV === 'production') {
 
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
+Vue.filter('dateFormat', function(dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
+  return moment(dataStr).format(pattern)
+})
 
 Vue.config.productionTip = false
 

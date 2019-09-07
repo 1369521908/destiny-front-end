@@ -1,7 +1,9 @@
 <template>
   <div class="app-container">
     <el-button @click="fetchData">开始</el-button>
+    <el-button class="el-button--danger" @click="deleteData">删除数据</el-button>
     <el-table
+      v-loading="listLoading"
       empty-text="没有数据"
       :data="list"
       style="width: 100%"
@@ -48,7 +50,7 @@
       </el-table-column>
       <el-table-column label="创建日期">
         <template slot-scope="scope">
-          {{ scope.row.date }}
+          {{ scope.row.date | dateFormat('YYYY-MM-DD HH:mm:ss') }}
         </template>
       </el-table-column>
     </el-table>
@@ -85,6 +87,9 @@ export default {
         this.list = response.data
         this.listLoading = false
       })
+    },
+    deleteData() {
+      this.list = null
     }
   }
 }
