@@ -33,9 +33,11 @@
           {{ scope.row.tag }}
         </template>
       </el-table-column>
-      <el-table-column label="头像(列表)">
+      <el-table-column label="头像">
         <template slot-scope="scope">
-          {{ scope.row.head }}
+          <div>
+            <img :src="scope.row.head" width="45%" height="45%" alt>
+          </div>
         </template>
       </el-table-column>
       <el-table-column label="联系人(列表)">
@@ -84,7 +86,7 @@ export default {
     fetchData() {
       this.listLoading = true
       getList().then(response => {
-        this.list = response.data
+        this.list = response.data.records
         this.listLoading = false
       })
     },
