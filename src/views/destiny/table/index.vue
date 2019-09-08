@@ -4,9 +4,11 @@
     <el-button class="el-button--danger" @click="deleteData">删除数据</el-button>
     <el-table
       v-loading="listLoading"
-      empty-text="没有数据"
+      empty-text="没有数据啊~"
       :data="list"
       style="width: 100%"
+      row-key="id"
+      fit
     >
       <el-table-column align="center" label="ID" width="95">
         <template slot-scope="scope">
@@ -36,23 +38,48 @@
       <el-table-column label="头像">
         <template slot-scope="scope">
           <div>
-            <img :src="scope.row.head" width="45%" height="45%" alt>
+            <img :src="scope.row.avatar" width="45%" height="45%" alt>
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="联系人(列表)">
-        <template slot-scope="scope">
-          {{ scope.row.contactIdList }}
-        </template>
-      </el-table-column>
-      <el-table-column label="照片(列表)">
-        <template slot-scope="scope">
-          {{ scope.row.pictureList }}
+      <el-table-column label="其他信息(列表)" type="expand">
+        <template slot-scope="props">
+          <el-form label-position="left" inline class="demo-table-expand">
+            <el-form-item label="联系人(列表)">
+              <div>
+                <el-tooltip v-for="(val, index) in JSON.parse(props.row.contactIdList)" :key="index" class="item" effect="dark" :content="val" placement="top-start">
+                  <el-button>
+                    {{ val }}
+                  </el-button>
+                </el-tooltip>
+              </div>
+            </el-form-item>
+            <el-form-item label="照片(列表)">
+              <div>
+                <p v-for="(val, index) in JSON.parse(props.row.pictureList)" :key="index">
+                  <img :src="val" alt width="45%" height="45%">
+                </p>
+              </div>
+            </el-form-item>
+          </el-form>
         </template>
       </el-table-column>
       <el-table-column label="创建日期">
         <template slot-scope="scope">
           {{ scope.row.date | dateFormat('YYYY-MM-DD HH:mm:ss') }}
+        </template>
+      </el-table-column>
+      <el-table-column>
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            @click="handleEdit(scope.$index, scope.row)"
+          >Edit</el-button>
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleDelete(scope.$index, scope.row)"
+          >Delete</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -87,6 +114,8 @@ export default {
       this.listLoading = true
       getList().then(response => {
         this.list = response.data.records
+        this.listLoading = false
+      }).catch(e => {
         this.listLoading = false
       })
     },
