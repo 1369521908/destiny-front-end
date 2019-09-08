@@ -6,6 +6,7 @@
       <el-button @click="fetchData">查询</el-button>
       <el-button class="el-button--danger" @click="deleteData">删除</el-button>
     </div>
+    <el-divider>我叫分割线</el-divider>
     <!--内容主体-->
     <div class="el-main">
       <el-table
