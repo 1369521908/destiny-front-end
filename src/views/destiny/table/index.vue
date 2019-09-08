@@ -4,9 +4,9 @@
     <!--头-->
     <div class="el-header">
       <el-button @click="fetchData">查询</el-button>
-      <el-button class="el-button--danger" @click="deleteData">删除</el-button>
+      <el-button class="el-button--danger" @click="handleDeleteAll">删除</el-button>
     </div>
-    <el-divider>我叫分割线</el-divider>
+    <el-divider />
     <!--内容主体-->
     <div class="el-main">
       <el-table
@@ -16,7 +16,7 @@
         style="width: 100%"
         row-key="id"
         fit
-        border="5px"
+        border
       >
         <el-table-column align="center" label="ID" width="95">
           <template slot-scope="scope">
@@ -60,11 +60,9 @@
             <el-form label-position="left" inline class="demo-table-expand">
               <el-form-item label="联系人(列表)">
                 <div>
-                  <el-tooltip v-for="(val, index) in JSON.parse(props.row.contactIdList)" :key="index" class="item" effect="dark" :content="val" placement="top-start">
-                    <el-button>
-                      {{ val }}
-                    </el-button>
-                  </el-tooltip>
+                  <el-button v-for="(val, index) in JSON.parse(props.row.contactIdList)" :key="index">
+                    {{ val }}
+                  </el-button>
                 </div>
               </el-form-item><br>
               <el-form-item label="照片(列表)">
@@ -82,18 +80,35 @@
           <template slot-scope="scope">
             <el-button
               size="mini"
-              @click="handleEdit(scope.$index, scope.row)"
+              @click="handleEdit(scope.row.id, scope.row)"
             >Edit</el-button>
             <el-button
               size="mini"
               type="danger"
-              @click="handleDelete(scope.$index, scope.row)"
+              @click="handleDelete(scope.row.id, scope.row)"
             >Delete</el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
-    <!--脚-->
+    <!--脚 分页-->
+    <!-- 分页居中放置-->
+    <nav style="text-align: center">
+      <div id="callBackPager">
+        <el-pagination
+          v-if="list.length > 0"
+          :current-page="current"
+          :page-sizes="[50, 100, 200, 300, 400, 1000]"
+          :page-size="size"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+          background
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+        />
+      </div>
+    </nav>
+    <!--表单-->
   </div>
 </template>
 
@@ -113,25 +128,54 @@ export default {
   },
   data() {
     return {
-      list: null,
-      listLoading: true
+      list: [],
+      listLoading: true,
+      total: 0,
+      current: 1,
+      size: 50
     }
   },
-  mounted() {
+  computed: {
+    params: function() {
+      return {
+        'current': this.current,
+        'size': this.size
+      }
+    }
+  },
+  created() {
     this.fetchData()
   },
   methods: {
     fetchData() {
       this.listLoading = true
-      getList().then(response => {
+      console.log(this.params)
+      getList(this.params).then(response => {
         this.list = response.data.records
+        this.total = response.data.total
         this.listLoading = false
       }).catch(e => {
         this.listLoading = false
       })
     },
-    deleteData() {
-      this.list = null
+    handleDelete(index, row) {
+      console.log(index)
+      console.log(row)
+    },
+    handleEdit(index, row) {
+      console.log(index)
+      console.log(row)
+    },
+    handleDeleteAll(e) {
+      this.list = []
+    },
+    handleSizeChange(e) {
+      this.size = e
+      this.fetchData()
+    },
+    handleCurrentChange(e) {
+      this.current = e
+      this.fetchData()
     }
   }
 }
