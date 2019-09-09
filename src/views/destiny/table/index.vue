@@ -15,6 +15,7 @@
         :data="list"
         style="width: 100%"
         row-key="id"
+        size="small"
         fit
         border
       >
@@ -98,7 +99,7 @@
         <el-pagination
           v-if="list.length > 0"
           :current-page="current"
-          :page-sizes="[50, 100, 200, 300, 400, 1000]"
+          :page-sizes="[10, 20, 30, 40, 50, 60]"
           :page-size="size"
           layout="total, sizes, prev, pager, next, jumper"
           :total="total"
@@ -132,7 +133,7 @@ export default {
       listLoading: true,
       total: 0,
       current: 1,
-      size: 50
+      size: 10
     }
   },
   computed: {
@@ -143,7 +144,7 @@ export default {
       }
     }
   },
-  created() {
+  mounted() {
     this.fetchData()
   },
   methods: {
