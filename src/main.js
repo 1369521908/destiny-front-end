@@ -16,6 +16,9 @@ import router from './router'
 
 import moment from 'moment'
 
+import Avue from '@smallwei/avue'
+import '@smallwei/avue/lib/index.css'
+
 import '@/icons' // icon
 import '@/permission' // permission control
 
@@ -38,6 +41,8 @@ Vue.use(ElementUI, { locale })
 Vue.filter('dateFormat', function(dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
   return moment(dataStr).format(pattern)
 })
+// use Avue
+Vue.use(Avue, { locale: 'zh' })
 
 Vue.config.productionTip = false
 
