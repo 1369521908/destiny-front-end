@@ -20,7 +20,7 @@ export default {
     return {
       obj: {},
       page: {
-        // pageSizes: [10, 20, 30, 40],默认
+        // pageSizes: [10, 20, 30, 40, 50, 100, 200], // 默认
         currentPage: 1,
         total: 10,
         pageSize: 10
@@ -28,36 +28,22 @@ export default {
       data: [],
       option: {
         title: '用户',
-        page: true,
         align: 'center',
         menuAlign: 'center',
         border: true,
         dialogDrag: true,
         dialogModal: false,
-        column: [
-          {
-            label: '姓名',
-            prop: 'username'
-          },
-          {
-            label: '性别',
-            prop: 'sex',
-            type: 'string'
-          }, {
-            label: '日期',
-            prop: 'date',
-            type: 'date',
-            format: 'yyyy-MM-dd hh:mm:ss'
-          }
-        ]
+        column: []
       }
     }
   },
   methods: {
     fetchData() {
+      console.log(this.page)
       getList(this.page).then(response => {
         this.data = response.data.records
         this.page.total = response.data.total
+        this.option.column = JSON.parse(response.data.column)
       }).catch(e => {
         console.log(e)
       })

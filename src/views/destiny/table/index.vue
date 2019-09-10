@@ -139,8 +139,8 @@ export default {
   computed: {
     params: function() {
       return {
-        'current': this.current,
-        'size': this.size
+        'currentPage': this.current,
+        'pageSize': this.size
       }
     }
   },
