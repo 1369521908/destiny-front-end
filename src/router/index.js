@@ -55,7 +55,7 @@ export const destinyRoutes = [
     }]
   },
 
-  {
+  /* {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
@@ -75,11 +75,26 @@ export const destinyRoutes = [
         meta: { title: 'Tree', icon: 'tree' }
       }
     ]
+  },*/
+  {
+    path: '/lol',
+    component: Layout,
+    redirect: '/lol/hero',
+    name: 'LOL',
+    meta: { title: 'LOL', icon: 'lol' },
+    children: [
+      {
+        path: 'hero',
+        name: 'Hero',
+        component: () => import('@/views/lol/hero/index'),
+        meta: { title: 'Hero', icon: 'lol' }
+      }
+    ]
   },
   {
     path: '/destiny',
     component: Layout,
-    redirect: '/destiny/user',
+    redirect: '/destiny/dialog',
     name: 'Destiny',
     meta: { title: 'Destiny', icon: 'eye-open' },
     children: [
@@ -97,8 +112,7 @@ export const destinyRoutes = [
       }
     ]
   },
-
-  {
+  /* {
     path: '/form',
     component: Layout,
     children: [
@@ -178,7 +192,7 @@ export const destinyRoutes = [
         meta: { title: 'External Link', icon: 'link' }
       }
     ]
-  },
+  },*/
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
