@@ -10,7 +10,6 @@
     <el-divider />
     <!--内容主体-->
     <div class="el-main">
-      <el-button @click="() => { $vm.showId = !showId}">显示官方id</el-button>
       <el-table
         v-loading="listLoading"
         empty-text="没有数据啊~"
@@ -26,11 +25,11 @@
             {{ scope.row.id }}
           </template>
         </el-table-column>
-        <el-table-column v-if="showId" label="heroId(官方id)">
+        <!--<el-table-column label="heroId(官方id)">
           <template slot-scope="scope">
             {{ scope.row.heroId }}
           </template>
-        </el-table-column>
+        </el-table-column>-->
         <el-table-column label="avatar">
           <template slot-scope="scope">
             <div>
@@ -125,8 +124,7 @@ export default {
       listLoading: true,
       total: 0,
       current: 1,
-      size: 10,
-      showId: false
+      size: 10
     }
   },
   computed: {
@@ -176,7 +174,6 @@ export default {
       for (const r of role.replace('[', '').replace(']', '').replace(' ', '').trim().split(',')) {
         roles.push(r)
       }
-      console.log(roles)
       return roles
     }
   }
