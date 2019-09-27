@@ -95,8 +95,7 @@ export default {
             prop: 'isWeekFree',
             type: 'input',
             filter: true,
-            search: true,
-            dataType: 'string'
+            search: true
           },
           {
             label: '攻击(六芒星)',

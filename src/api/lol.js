@@ -7,3 +7,11 @@ export function getList(params, page) {
     params
   })
 }
+
+export function getDetailList(params, page) {
+  return request({
+    url: '/lol/heroDetail',
+    method: 'get',
+    params
+  })
+}

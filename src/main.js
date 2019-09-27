@@ -16,8 +16,12 @@ import router from './router'
 
 import moment from 'moment'
 
+// Avue
 import Avue from '@smallwei/avue'
 import '@smallwei/avue/lib/index.css'
+
+// Echarts
+import echarts from 'echarts'
 
 import '@/icons' // icon
 import '@/permission' // permission control
@@ -43,6 +47,8 @@ Vue.filter('dateFormat', function(dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
 })
 // use Avue
 Vue.use(Avue, { locale: 'zh' })
+// use Echarts
+Vue.prototype.$echarts = echarts
 
 Vue.config.productionTip = false
 

@@ -88,6 +88,18 @@ export const destinyRoutes = [
         name: 'Hero',
         component: () => import('@/views/lol/hero/index'),
         meta: { title: 'Hero', icon: 'lol' }
+      },
+      {
+        path: 'hero2',
+        name: 'Hero2',
+        component: () => import('@/views/lol/hero2/index'),
+        meta: { title: 'Hero2', icon: 'lol' }
+      },
+      {
+        path: 'heroDetail',
+        name: 'HeroDetail',
+        component: () => import('@/views/lol/heroDetail/index'),
+        meta: { title: 'HeroDetail', icon: 'lol' }
       }
     ]
   },
