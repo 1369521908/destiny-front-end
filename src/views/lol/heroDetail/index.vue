@@ -1,68 +1,106 @@
 <template>
   <el-container>
     <el-header>
-      <el-button>点击</el-button>
+      <div>
+        <el-input v-model="id"/>
+        <el-button @click="hexagramSimple">点击</el-button>
+      </div>
     </el-header>
     <el-main>
-      <div id="main" style="width: 600px;height:400px;" />
+      <div id="hexagramSimple" style="width: 600px;height:400px;" />
     </el-main>
   </el-container>
-  <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-
 </template>
 
 <script>
-import { getDetailList } from '@/api/lol'
+import { getDetail } from '@/api/lol'
 
 export default {
   data() {
     return {
-      data: {},
-      page: {}
+      id: 429,
+      max: 10,
+      
     }
   },
   computed: {
     option: function() {
       return {
-        xAxis: {
-          type: 'category',
-          // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-          data: []
+    title: {
+        text: '英雄六芒星'
+    },
+    tooltip: {},
+    legend: {
+    },
+    radar: {
+        // shape: 'circle',
+        name: {
+            textStyle: {
+                color: '#ddd',
+                backgroundColor: '#999',
+                borderRadius: 3,
+                padding: [3, 5]
+           }
         },
-        yAxis: {
-          type: 'value'
-        },
-        series: [{
-          // data: [820, 932, 901, 934, 1290, 1330, 1320],
-          data: [],
-          type: 'line'
-        }]
-      }
+        indicator: [
+           { name: '攻击力(attack)', max: this.max},
+           { name: '防御(defense)', max: this.max},
+           { name: '魔法(magic)', max: this.max},
+           { name: '上手难度(difficulty)', max: this.max}
+        ],
+        splitArea: {
+                areaStyle: {
+                    color: [
+                    'rgba(114, 172, 209, 0.2)',
+                    'rgba(114, 172, 209, 0.4)', 'rgba(114, 172, 209, 0.6)',
+                    'rgba(114, 172, 209, 0.8)', 'rgba(114, 172, 209, 1)'
+                    ],
+                    shadowColor: 'rgba(0, 0, 0, 0.3)',
+                    shadowBlur: 10
+                }
+            }
+    },
+    series: [{
+        name: '',
+        type: 'radar',
+        // areaStyle: {normal: {}},
+        data : [
+            {
+                value : this.hexagramVal,
+                name : '英雄属性'
+            }
+        ]
+    }]
+}
+    },
+    hero: function() {
+      return {}
+    },
+    hexagramVal: function() {
+      return []
     }
   },
   mounted() {
-    this.eChart()
+    this.hexagramSimple()
   },
   methods: {
     // 初始化 echart
-    eChart() {
-      const eChart = this.$echarts.init(document.getElementById('main'))
-      getDetailList(this.data, this.page).then(response => {
-        this.data = response.data.records
-        this.page.total = response.data.total
-        // this.option.column = JSON.parse(response.header)
-        const heroName = []
-        const attackRange = []
-        for (const d in response.data.records) {
-          const hero = response.data.records[d]
-          heroName.push(hero.alias)
-          attackRange.push(hero.attackrange)
+    hexagramSimple() {
+      // 初始化echart控件
+      const hexagramSimple = this.$echarts.init(document.getElementById('hexagramSimple'))
+      // 后台请求数据
+      getDetail(this.id).then(response => {
+        for(const k in response.data) {
+          // 动态构造对象
+          this.hero[k] = response.data[k]
         }
-        this.option.xAxis.data = heroName
-        this.option.series[0].data = attackRange
-        eChart.setOption(this.option)
-        console.log(this.option.xAxis.data)
-        console.log(this.option.series[0].data)
+        this.hexagramVal.push(this.hero.attack)
+        this.hexagramVal.push(this.hero.defense)
+        this.hexagramVal.push(this.hero.magic)
+        this.hexagramVal.push(this.hero.difficulty)
+
+        // 设置echart控件
+        hexagramSimple.setOption(this.option)
       }).catch(e => {
         console.log(e)
       })

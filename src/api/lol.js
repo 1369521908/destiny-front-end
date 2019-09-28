@@ -8,6 +8,13 @@ export function getList(params, page) {
   })
 }
 
+export function getDetail(id) {
+  return request({
+    url: '/lol/heroDetail/' + id,
+    method: 'get'
+  })
+}
+
 export function getDetailList(params, page) {
   return request({
     url: '/lol/heroDetail',
