@@ -105,7 +105,7 @@ export default {
         val.push(response.data.magic)
         val.push(response.data.difficulty)
 
-        // 设置echart控件
+        // 设置option
         this.hexagram.setOption(option)
       }).catch(e => {
         console.log(e)
