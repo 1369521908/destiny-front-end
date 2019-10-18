@@ -114,8 +114,9 @@ export default {
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
+            console.log('asd')
           }).catch((e) => {
-            console.log('登录参数出现异常:' + e)
+            console.log('登录出现异常:' + e)
             this.loading = false
           })
         } else {

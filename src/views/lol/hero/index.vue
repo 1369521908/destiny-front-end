@@ -4,6 +4,7 @@
   <div class="app-container">
     <!--头-->
     <div class="el-header">
+      <h1>Element-UI</h1>
       <el-button @click="fetchData">查询</el-button>
       <el-button class="el-button--danger" @click="handleDeleteAll">删除</el-button>
     </div>
