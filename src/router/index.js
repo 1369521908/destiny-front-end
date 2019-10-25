@@ -17,7 +17,7 @@ import Layout from '@/layout'
  * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
  * name:'router-name'             the name is used by <keep-alive> (must set!!!)
  * meta : {
-    roles: ['admin','editor']    control the page roles (you can set multiple roles)
+    roles: ['admin','obsidian']    control the page roles (you can set multiple roles)
     title: 'title'               the name show in sidebar and breadcrumb (recommend set)
     icon: 'svg-name'             the icon show in the sidebar
     breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
@@ -100,6 +100,24 @@ export const destinyRoutes = [
         name: 'HeroDetail',
         component: () => import('@/views/lol/heroDetail/index'),
         meta: { title: 'HeroDetail', icon: 'lol' }
+      },
+      {
+        path: 'editor',
+        name: 'Editor',
+        component: () => import('@/views/lol/obsidian/index'),
+        meta: { title: 'Editor', icon: 'lol' }
+      },
+      {
+        path: 'legends',
+        name: 'Legends',
+        component: () => import('@/views/lol/legends/index'),
+        meta: { title: 'Legends', icon: 'lol' }
+      },
+      {
+        path: 'model',
+        name: 'Model',
+        component: () => import('@/views/lol/model/index'),
+        meta: { title: 'Model', icon: 'lol' }
       }
     ]
   },

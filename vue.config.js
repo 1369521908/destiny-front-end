@@ -42,7 +42,7 @@ module.exports = {
       [process.env.VUE_APP_BASE_API]: {
         // http://127.0.0.1:9527/api 指向真实服务器路径
         // target: `http://127.0.0.1:${port}/mock`,
-        target: `http://127.0.0.1:9527/api`,
+        target: `http://127.0.0.1:9531/api`,
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
