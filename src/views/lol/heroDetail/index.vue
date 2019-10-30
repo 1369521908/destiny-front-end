@@ -18,6 +18,7 @@
 
 <script>
 import { get } from '@/api/lol'
+import G2 from '@antv/g2'
 
 export default {
   data() {
@@ -42,9 +43,14 @@ export default {
     this.hexagramSimple()
   },
   methods: {
-    // 初始化 echart
     hexagramSimple() {
-      // 初始化echart控件
+      const chart = new G2.Chart({
+        container: 'hexagram',
+        forceFit: true,
+        height: window.innerHeight
+      })
+      chart.source(this.hexagram)
+      console.log('初始化UI控件', chart)
       // 后台请求数据
       get(this.id).then(response => {
         console.log(response)
