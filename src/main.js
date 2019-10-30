@@ -20,8 +20,8 @@ import moment from 'moment'
 import Avue from '@smallwei/avue'
 import '@smallwei/avue/lib/index.css'
 
-// Echarts
-import echarts from 'echarts'
+// AntV G2
+import G2 from '@antv/g2'
 
 import '@/icons' // icon
 import '@/permission' // permission control
@@ -47,8 +47,8 @@ Vue.filter('dateFormat', function(dataStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
 })
 // use Avue
 Vue.use(Avue, { locale: 'zh' })
-// use Echarts
-Vue.prototype.$echarts = echarts
+// use AntV G2
+Vue.use(G2)
 
 Vue.config.productionTip = false
 

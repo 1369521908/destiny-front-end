@@ -8,9 +8,9 @@
       </avue-search>
       <avue-card :option="optionCard" :data="dataCard">
         <template slot="menu" slot-scope="scope">
-          <span @click.stop="model(scope.row,scope.index)">3D模型</span>
+          <span @click.stop="model(scope.row,scope.index)">模型</span>
           <el-tooltip placement="top">
-            <div slot="content">{{ scope.row.shortBio.toString().trim() }}</div>
+            <div slot="content">{{ scope.row.shortBio.toString() }}</div>
             <span @click.stop="detail(scope.row,scope.index)">详情</span>
           </el-tooltip>
         </template>
@@ -29,7 +29,7 @@ export default {
         props: {
           alias: '',
           img: 'avatar',
-          title: 'title',
+          title: 'name',
           info: 'shortBio',
           id: 'heroId'
         }
@@ -75,12 +75,12 @@ export default {
       // this.$router.addRoutes()
     },
     handleChange(form) {
+      console.log('筛选搜索')
       this.$message.success(JSON.stringify(form))
     },
     fetchData() {
       this.dataCard = []
       getDetailList({ currentPage: 0, pageSize: 999 }).then(response => {
-        console.log(response)
         this.dataCard = response.data.records
       }).catch(e => {
         console.log(e)
