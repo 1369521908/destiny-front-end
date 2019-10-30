@@ -46,7 +46,7 @@ export default {
     hexagramSimple() {
       // 初始化echart控件
       // 后台请求数据
-      get().then(response => {
+      get(this.id).then(response => {
         console.log(response)
       }).catch(e => {
         console.log(e)
