@@ -102,10 +102,10 @@ export const destinyRoutes = [
         meta: { title: 'HeroDetail', icon: 'lol' }
       },
       {
-        path: 'editor',
-        name: 'Editor',
+        path: 'obsidian',
+        name: 'Obsidian',
         component: () => import('@/views/lol/obsidian/index'),
-        meta: { title: 'Editor', icon: 'lol' }
+        meta: { title: 'Obsidian', icon: 'lol' }
       },
       {
         path: 'legends',

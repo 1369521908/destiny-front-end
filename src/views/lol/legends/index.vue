@@ -79,11 +79,21 @@ export default {
       this.$message.success(JSON.stringify(form))
     },
     fetchData() {
+      // loading
+      const loading = this.$loading({
+        lock: true,
+        text: '正在请求数据,请稍等...',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.9)'
+      })
+
       this.dataCard = []
       getDetailList({ currentPage: 0, pageSize: 999 }).then(response => {
         this.dataCard = response.data.records
       }).catch(e => {
         console.log(e)
+      }).finally(e => {
+        loading.close()
       })
     }
   }
