@@ -4,7 +4,8 @@ export function getList(params, page) {
   return request({
     url: '/lol/hero',
     method: 'get',
-    params
+    params,
+    page
   })
 }
 
@@ -22,10 +23,10 @@ export function getDetail(id) {
   })
 }
 
-export function getDetailList(params, page) {
+export function getDetailList(data) {
   return request({
-    url: '/lol/heroDetail',
-    method: 'get',
-    params
+    url: '/lol/heroDetail/all',
+    method: 'post',
+    data
   })
 }

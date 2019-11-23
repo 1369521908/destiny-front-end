@@ -81,43 +81,43 @@ export const destinyRoutes = [
     component: Layout,
     redirect: '/lol/hero',
     name: 'LOL',
-    meta: { title: 'LOL', icon: 'lol' },
+    meta: { title: 'LOL', icon: 'eye-open' },
     children: [
       {
         path: 'hero',
         name: 'Hero',
         component: () => import('@/views/lol/hero/index'),
-        meta: { title: 'Hero', icon: 'lol' }
+        meta: { title: 'Hero', icon: 'eye' }
       },
       {
         path: 'hero2',
         name: 'Hero2',
         component: () => import('@/views/lol/hero2/index'),
-        meta: { title: 'Hero2', icon: 'lol' }
+        meta: { title: 'Hero2', icon: 'eye' }
       },
       {
         path: 'heroDetail',
         name: 'HeroDetail',
         component: () => import('@/views/lol/heroDetail/index'),
-        meta: { title: 'HeroDetail', icon: 'lol' }
+        meta: { title: 'HeroDetail', icon: 'eye' }
       },
       {
         path: 'obsidian',
         name: 'Obsidian',
         component: () => import('@/views/lol/obsidian/index'),
-        meta: { title: 'Obsidian', icon: 'lol' }
+        meta: { title: 'Obsidian', icon: 'eye' }
       },
       {
         path: 'legends',
         name: 'Legends',
         component: () => import('@/views/lol/legends/index'),
-        meta: { title: 'Legends', icon: 'lol' }
+        meta: { title: 'Legends', icon: 'eye' }
       },
       {
         path: 'model',
         name: 'Model',
         component: () => import('@/views/lol/model/index'),
-        meta: { title: 'Model', icon: 'lol' }
+        meta: { title: 'Model', icon: 'eye' }
       }
     ]
   },

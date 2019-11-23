@@ -14,11 +14,23 @@
           :file-list="fileList"
           :auto-upload="false"
           accept="wad/client"
+          :limit="1"
         >
           <el-button slot="trigger" size="small" type="primary">wad</el-button>
           <el-button style="margin-left: 10px;" size="small" @click="submitUpload">解析</el-button>
-          <el-button style="margin-left: 10px;" size="small" disabled="export">导出</el-button>
-          <div slot="tip" class="el-upload__tip">{{ msg }}</div>
+          <!--<el-button style="margin-left: 10px;" size="small" disabled="export">导出</el-button>-->
+          <div v-if="msg!= null" slot="tip" class="el-upload__tip" :scop="msg">
+            <el-alert
+              title="解析结果"
+              type="success"
+              :closable="false"
+            >
+              <p>文件名称 {{ msg.name }}</p>
+              <p>文件大小 {{ msg.size }} MB </p>
+              <p>解析资源数 {{ msg.count }}</p>
+              <p>解析耗时 {{ msg.cost }} 毫秒</p>
+            </el-alert>
+          </div>
         </el-upload>
         <!--预留选项框-->
         <!--<el-select v-model="value" placeholder="请选择/搜索英雄">
@@ -77,10 +89,10 @@ import ClipboardJs from 'clipboard'
 export default {
   data() {
     return {
-      uploadUrl: '/lol/obsidian/wad/convert',
+      uploadUrl: '/#',
       fileList: [],
       data: [],
-      msg: '',
+      msg: null,
       filter: '',
       copyBtn: null,
       export: false
@@ -111,10 +123,24 @@ export default {
       // 上传表单
       const formData = new FormData()
       formData.append('file', file)
+
+      // 请求服务
+      const time = new Date().getTime()
       axios.post('/api/lol/obsidian/wad/convert', formData).then(response => {
-        // 大数组
+        // 大列表渲染
         this.$refs.xTable.reloadData(response.data.data)
-        this.msg = '文件:' + file.name + ',解析文件数:' + response.data.data.length
+        /* this.msg = '文件:' + file.name +
+          ' | 解析文件数:' + response.data.data.length +
+          ' | 文件大小:' + parseInt(file.size / 1024 / 1024) + 'MB' +
+          ' | 解析耗时:' + (parseInt(new Date().getTime() - time)) + '毫秒'*/
+
+        // 返回提示
+        this.msg = {
+          'name': file.name,
+          'count': response.data.data.length,
+          'size': parseFloat(file.size / 1024 / 1024).toFixed(2),
+          'cost': parseInt(new Date().getTime() - time)
+        }
       }).catch(e => {
         console.log(e)
       }).finally(() => {
