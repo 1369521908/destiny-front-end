@@ -24,24 +24,10 @@ export const heroRole = [{
   value: 'fighter'
 }]
 
-/* export const heroRole1 = {
-  'mage': '法师',
-  'tank': '坦克',
-  'assassin': '刺客',
-  'support': '辅助',
-  'marksman': '射手',
-  'fighter': '战士'
-}*/
-
-export function getHeroRole_en(roles) {
-  const roleStrs = []
-  for (const rs in roles) {
-    for (const r in this.heroRole) {
-      if (rs.key === r.key) {
-        roleStrs.join(r)
-      }
+export function getHeroRole_cn(role) {
+  for (const index in heroRole) {
+    if (heroRole[index].value === role) {
+      return heroRole[index].label
     }
   }
-  console.log(roleStrs)
-  return roleStrs
 }

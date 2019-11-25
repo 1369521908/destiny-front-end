@@ -54,7 +54,7 @@
               <p>推荐: {{ scope.row.role }}</p>
               <div slot="reference" class="name-wrapper">
                 <!--<el-tag size="medium">{{ i }}</el-tag>-->
-                <el-tag size="medium">{{ role }}</el-tag>
+                <el-tag size="medium">{{ getHeroRole(role) }}</el-tag>
               </div>
             </el-popover>
           </template>
@@ -107,6 +107,7 @@
 
 <script>
 import { getList } from '@/api/lol'
+import { getHeroRole_cn } from '@/enum/heroEnums'
 
 export default {
   filters: {
@@ -125,7 +126,8 @@ export default {
       listLoading: true,
       total: 0,
       current: 1,
-      size: 10
+      size: 10,
+      role: null
     }
   },
   computed: {
@@ -176,6 +178,9 @@ export default {
         roles.push(r)
       }
       return roles
+    },
+    getHeroRole(role) {
+      return getHeroRole_cn(role)
     }
   }
 }
