@@ -23,11 +23,3 @@ export const heroRole = [{
   label: '战士',
   value: 'fighter'
 }]
-
-export function getHeroRole_cn(role) {
-  for (const index in heroRole) {
-    if (heroRole[index].value === role) {
-      return heroRole[index].label
-    }
-  }
-}

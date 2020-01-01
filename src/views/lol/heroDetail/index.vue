@@ -2,22 +2,29 @@
   <el-container>
     <el-header />
     <el-main>
-      <el-container>
-        <el-col :span="6">
-          <img :src="avatar">
-          <el-input v-model="id" />
-          <el-button @click="hexagramSimple">点击</el-button>
-        </el-col>
-      </el-container>
-      <el-container>
-        <div id="hexagram" style="width: 600px; height:400px;" />
-      </el-container>
+      <el-row>
+        <el-alert>{{ JSON.stringify(heroDetail) }}</el-alert>
+      </el-row>
+      <el-row>
+        <el-alert>{{ JSON.stringify(heroSpell) }}</el-alert>
+      </el-row>
+      <el-row>
+        <el-alert>{{ JSON.stringify(heroSkin) }}</el-alert>
+      </el-row>
+      <!--渲染-->
+      <el-row>
+        <el-container>
+          <div id="hexagram" style="width: 600px; height:400px;" />
+        </el-container>
+      </el-row>
     </el-main>
   </el-container>
 </template>
 
 <script>
-import { get } from '@/api/lol'
+import { getDetail } from '@/api/lol'
+import { getSpell } from '@/api/lol'
+import { getSkin } from '@/api/lol'
 import G2 from '@antv/g2'
 
 export default {
@@ -26,7 +33,10 @@ export default {
       id: 429,
       max: 10,
       hexagram: {},
-      avatar: ''
+      avatar: '',
+      heroDetail: {},
+      heroSpell: [],
+      heroSkin: []
     }
   },
   computed: {
@@ -40,6 +50,18 @@ export default {
   watch: {
   },
   mounted() {
+    getDetail(this.id).then(response => {
+      this.heroDetail = response.data
+    })
+    getSpell(this.id).then(response => {
+      console.log(response)
+      this.heroSpell = response.data
+    })
+    getSkin(this.id).then(response => {
+      console.log(response)
+      this.heroSkin = response.data
+    })
+    // 属性
     this.hexagramSimple()
   },
   methods: {
@@ -50,14 +72,6 @@ export default {
         height: window.innerHeight
       })
       chart.source(this.hexagram)
-      console.log('初始化UI控件', chart)
-      // 后台请求数据
-      get(this.id).then(response => {
-        console.log(response)
-      }).catch(e => {
-        console.log(e)
-      })
-      console.log()
     }
   }
 }

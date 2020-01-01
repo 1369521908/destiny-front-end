@@ -30,3 +30,18 @@ export function getDetailList(data) {
     data
   })
 }
+
+export function getSpell(heroId) {
+  return request({
+    url: '/lol/heroSpell/' + heroId,
+    method: 'get'
+  })
+}
+
+export function getSkin(heroId) {
+  return request({
+    url: '/lol/heroSkin/' + heroId,
+    method: 'get'
+  })
+}
+

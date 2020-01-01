@@ -45,8 +45,8 @@
             <span @click.stop="model(scope.row,scope.index)">模型</span>
             <el-tooltip placement="top">
               <div slot="content">{{ scope.row.shortBio.toString() }}</div>
-              <span @click.stop="detail(scope.row,scope.index)">详情</span>
             </el-tooltip>
+            <span @click.stop="detail(scope.row,scope.index)">详情</span>
           </template>
         </avue-card>
       </el-row>
@@ -106,7 +106,13 @@ export default {
     detail(row, index) {
       this.$message.success('查看控制台')
       console.log(row, index)
-      // this.$router.addRoutes()
+      // 导航到详情页面
+      this.$router.push({
+        path: './HeroDetail',
+        query: {
+          heroId: index
+        }
+      })
     },
     handleChange(form) {
       // console.log('筛选搜索', form)
@@ -131,7 +137,7 @@ export default {
         this.dataCard = response.data
       }).catch(e => {
         console.log(e)
-      }).finally(e => {
+      }).finally(() => {
         loading.close()
       })
     },

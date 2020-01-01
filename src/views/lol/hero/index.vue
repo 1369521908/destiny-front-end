@@ -50,11 +50,11 @@
         </el-table-column>
         <el-table-column label="role">
           <template slot-scope="scope">
-            <el-popover v-for="(role , i) in calRole(scope.row.role)" :key="i" trigger="hover" placement="top">
+            <el-popover v-for="(r , i) in calRole(scope.row.role)" :key="i" trigger="hover" placement="top">
               <p>推荐: {{ scope.row.role }}</p>
               <div slot="reference" class="name-wrapper">
                 <!--<el-tag size="medium">{{ i }}</el-tag>-->
-                <el-tag size="medium">{{ getHeroRole(role) }}</el-tag>
+                <el-tag size="medium">{{ getHeroRole(r) }}</el-tag>
               </div>
             </el-popover>
           </template>

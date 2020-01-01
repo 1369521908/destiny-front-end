@@ -1,11 +1,11 @@
 <template>
   <el-main class="el-container">
     <!--选择器-->
-    <!--<el-row>-->
-      <!--<el-col>-->
-        <!--<el-button>选择英雄</el-button>-->
-      <!--</el-col>-->
-    <!--</el-row>-->
+    <el-row>
+      <el-col>
+        <el-button>选择英雄</el-button>
+      </el-col>
+    </el-row>
     <!--参数滑动条-->
     <el-row>
       <el-col :span="6">
@@ -32,15 +32,15 @@ export default {
   data() {
     return {
       // 摄像机
-      camera: {},
+      camera: null,
       // 场景
-      scene: {},
+      scene: null,
       // 网格
-      mesh: {},
+      mesh: null,
       // 几何体
-      geometry: {},
+      geometry: null,
       // 材质
-      material: {},
+      material: null,
       // 摄像机z初始位置
       position: 100
     }
@@ -100,6 +100,7 @@ export default {
       // 网格变换
       this.mesh.rotation.x += 0.01
       this.mesh.rotation.y += 0.02
+      this.mesh.rotation.z += 0.03
 
       this.renderer.render(this.scene, this.camera)
     }
