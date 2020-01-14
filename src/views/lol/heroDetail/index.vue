@@ -14,7 +14,7 @@
       <!--渲染-->
       <el-row>
         <el-container>
-          <div id="hexagram" style="width: 600px; height:400px;" />
+          <div id="hexagram" />
         </el-container>
       </el-row>
     </el-main>
@@ -78,5 +78,10 @@ export default {
 </script>
 
 <style scoped>
+
+  #hexagram {
+    width: max-content;
+    height:max-content;
+  }
 
 </style>

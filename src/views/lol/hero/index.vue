@@ -107,7 +107,6 @@
 
 <script>
 import { getList } from '@/api/lol'
-import { getHeroRole_cn } from '@/enum/heroEnums'
 
 export default {
   filters: {
@@ -180,7 +179,7 @@ export default {
       return roles
     },
     getHeroRole(role) {
-      return getHeroRole_cn(role)
+      return role
     }
   }
 }

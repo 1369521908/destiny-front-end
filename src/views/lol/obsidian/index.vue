@@ -54,6 +54,11 @@
     <!--解析表格-->
     <el-row>
       <el-col :span="24">
+        <vxe-toolbar>
+          <template v-slot:buttons>
+            <vxe-button @click="exportHash">默认导出</vxe-button>
+          </template>
+        </vxe-toolbar>
         <vxe-table
           ref="xTable"
           border
@@ -164,6 +169,9 @@ export default {
         this.$message.error({ message: '复制失败', showClose: true })
         clipboard.destroy()
       })
+    },
+    exportHash() {
+      this.$refs.xTable.exportData({ type: 'csv' })
     }
   }
 }
